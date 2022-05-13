@@ -1,6 +1,9 @@
+import { useRouter } from "next/router"
+
 export default function PopularCategories({ category }) {
+    const router = useRouter()
     return (
-        <div className="relative bg-slate-100 rounded-2xl overflow-hidden w-full h-full flex flex-col justify-start items-center p-8 group cursor-pointer">
+        <div className="relative bg-slate-100 rounded-2xl overflow-hidden w-full h-full flex flex-col justify-start items-center p-8 group cursor-pointer" onClick={() => router.push(`/category/${category.name}`)}>
             <img src={category.image} alt="" className="w-full h-60 object-cover" />
             <p className="my-4 text-lg font-bold">{category.name} Cuisine</p>
             <div className="absolute bg-slate-600 w-full h-full -top-full -left-full group-hover:animate-translate-square">

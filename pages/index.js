@@ -4,10 +4,14 @@ import { useEffect, useState } from "react"
 import FoodLoops from "../components/HomepageAnimation/FoodLoops";
 import axios from "axios";
 import PopularCategories from "../components/PopularCategories";
+import PopularDishes from "../components/PopularDishes";
+import { useRouter } from "next/router";
 
 export default function Home({ homepageData, categories, popularProducts }) {
 
   const [color, setColor] = useState(0)
+  const router = useRouter()
+
   useEffect(() => {
     const Id = setInterval(() => {
       setColor(prev => prev === 0 ? 1 : 0)
@@ -36,9 +40,12 @@ export default function Home({ homepageData, categories, popularProducts }) {
       <div className="absolute md:top-[650px] sm:top-[700px] top-[800px] w-full flex justify-center items-center flex-col">
         <h2 className="text-4xl font-bold mb-12">Popular Categories</h2>
         <div className="w-full grid grid-cols-4 justify-items-center gap-y-8 gap-x-8 px-4">
-          {categories.categories.map(category => <PopularCategories category={category} />)}
+          {categories.categories.map(category => <PopularCategories category={category} key={category.id} />)}
         </div>
         <h2 className="text-4xl font-bold my-12">Popular Dishes</h2>
+        <div className="w-full grid grid-cols-4 justify-items-center gap-y-16 gap-x-16 px-16">
+          {popularProducts.popularProducts.map(product => <PopularDishes product={product} key={product.id} />)}
+        </div>
       </div>
     </div>
   )
